@@ -1,24 +1,46 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import MovieCards from './components/MovieCards';
 import jsonData from './data.json';
-
-const TRAILER_URL = "https://api.myjson.com/bins/69x4b";
+import { Container } from 'reactstrap';
+import './App.css'
+const FILTERED_DATA = Object.values(jsonData[1])
 class App extends Component {
   state = {
     loading: true,
-    data: [],
-    showData: [],
+    data: FILTERED_DATA,
+    showData: FILTERED_DATA.slice(0, 10),
     prevValue: 0,
-    nextValue: 10
+    nextValue: 10,
+    width: 0,
+    height: 0,
+    activeColCount: 4
   }
   componentDidMount() {
-    this.fetchData();
+
+    this.updateWindowDimensions();
     window.addEventListener('scroll', this.onScroll, false);
+    window.addEventListener('resize', this.updateWindowDimensions);
   }
   componentWillUnmount() {
     window.removeEventListener('scroll', this.onScroll, false);
+    window.removeEventListener('resize', this.updateWindowDimensions);
   }
+  //Check which devices are we
+  updateWindowDimensions = () => {
+
+    if (window.innerWidth >= 992 && this.state.activeColCount !== 3) {
+      this.setState({ activeColCount: 4 })
+    }
+    else if (window.innerWidth >= 768 && this.state.activeColCount !== 2) {
+      this.setState({ activeColCount: 3 })
+    }
+    else {
+      this.setState({ activeColCount: 2 })
+    }
+
+
+  }
+  //Append data on scroll(feasible infinite scroll[if data comes from api])[dont eat all browser memory :-)]
   onScroll = () => {
     if (
       (window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 500) &&
@@ -30,25 +52,14 @@ class App extends Component {
       this.setState({ prevValue: updatedPrevValue, nextValue: updatedNextValue, showData: appendData })
     }
   }
-  fetchData = async () => {
-    try {
-      let result = await axios.get(TRAILER_URL);
-      let dataDisplay = Object.values(result.data[1]);
-      this.setState({
-        data: dataDisplay, showData: dataDisplay.slice(this.state.prevValue,
-          this.state.nextValue), loading: false
-      })
-    }
-    catch (e) {
-      console.log("e", e)
-    }
-  }
+
   render() {
-    if (this.state.loading) return <>Loading...</>;
-    console.log(this.state.showData);
     return (
-      <div className="ml-2 mr-2">
-        <MovieCards movies={this.state.showData} />
+      <div>
+        <h1 className="text-center">Movie Trailer</h1>
+        <Container>
+          <MovieCards movies={this.state.showData} activeColCount={this.state.activeColCount} />
+        </Container>
       </div>
     );
   }

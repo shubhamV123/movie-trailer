@@ -31,3 +31,46 @@
     transform: rotate(360deg);
   }
 }
+
+.card__title{
+  font-weight: 700;
+    font-size: 1.28571429em;
+    margin-top: -.21425em;
+    line-height: 1.28571429em;
+}
+.movie__card{
+  cursor: pointer;
+  transition: 0.3s all;
+}
+.flex__space-around{
+display: flex;
+justify-content: space-around;
+flex-wrap: wrap;
+}
+.flex__space-between{
+  display: flex;
+  flex-wrap: wrap;
+justify-content: space-between
+}
+
+.player-wrapper {
+  position: relative;
+  padding-top: 56.25% /* Player ratio: 100 / (1280 / 720) */
+}
+ 
+.react-player {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-bottom: 10px;
+    background: rgba(0,0,0,.1);
+}
+.active-card{
+  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+}
+@media(max-width:992px){
+  .react-player{
+    width: auto;
+    height: auto;
+  }
+}
