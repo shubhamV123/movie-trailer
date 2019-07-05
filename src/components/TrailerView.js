@@ -11,13 +11,8 @@ const TrailerView = ({ data, view, id }) => {
                 <div className='player-wrapper'>
                     <ReactPlayer className='react-player'
 
-                        url={TrailerURL} config={{
-                            file: {
-                                attributes: {
-                                    poster: 'https://in.bmscdn.com/events/moviecard/ET00106287.jpg'
-                                }
-                            }
-                        }} playing={false} width="100%" height="100%" />
+                        controls={true}
+                        url={TrailerURL} playing={false} width="100%" height="100%" />
                 </div>
             </Col>
             <Col lg="5" md="6" >
