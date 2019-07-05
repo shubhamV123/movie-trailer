@@ -52,4 +52,4 @@ const MovieCards = ({ movies, activeColCount }) => {
 
 }
 
-export default MovieCards;
+export default React.memo(MovieCards);

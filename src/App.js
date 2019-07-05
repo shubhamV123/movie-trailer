@@ -27,15 +27,19 @@ class App extends Component {
   }
   //Check which devices are we
   updateWindowDimensions = () => {
+    let { activeColCount } = this.state;
+    if (window.innerWidth >= 992 && activeColCount !== 4) {
 
-    if (window.innerWidth >= 992 && this.state.activeColCount !== 3) {
       this.setState({ activeColCount: 4 })
     }
-    else if (window.innerWidth >= 768 && this.state.activeColCount !== 2) {
+    if ((window.innerWidth >= 768 && window.innerWidth < 992) && activeColCount !== 3) {
       this.setState({ activeColCount: 3 })
     }
-    else {
+    if ((window.innerWidth >= 576 && window.innerWidth < 768) && activeColCount !== 2) {
       this.setState({ activeColCount: 2 })
+    }
+    if ((window.innerWidth < 576) && activeColCount !== 1) {
+      this.setState({ activeColCount: 1 })
     }
 
 
