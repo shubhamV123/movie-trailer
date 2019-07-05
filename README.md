@@ -2,9 +2,21 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Installation 
+
+
+1. For running this project you need to install [nodejs](https://nodejs.org/en/) in your system. If you already installed node in your system you can check out from here by running this command: 
+     
+        node -v
+1.  Install dependencies:
+
+        npm install
+
 ## Available Scripts
 
 In the project directory, you can run:
+
+
 
 ### `npm start`
 
